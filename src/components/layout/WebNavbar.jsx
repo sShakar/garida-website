@@ -41,7 +41,7 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
 
   const authButtons = [
     { label: "Sign in", link: "/sign-in", variant: "ghost" },
-    { label: "Get started", link: "/dashboard", variant: "default" },
+    { label: "Get started", link: "/sign-up", variant: "default" },
   ];
 
   const user = {
@@ -116,7 +116,7 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
                       {unreadNotifications > 0 && (
                         <Badge
                           variant="default"
-                          className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
+                          className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
                         >
                           {unreadNotifications}
                         </Badge>
@@ -127,10 +127,7 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
                   {/* User Menu */}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="flex cursor-pointer items-center gap-2 px-2"
-                      >
+                      <Button variant="ghost" className="flex cursor-pointer items-center gap-2 px-2">
                         <Avatar className="h-8 w-8 rounded-lg">
                           <AvatarImage src={user.avatar} alt={user.name} />
                           <AvatarFallback className="rounded-lg">
@@ -139,7 +136,7 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
                         </Avatar>
                         <div className="hidden flex-col items-start text-left lg:flex">
                           <span className="text-sm font-medium">{user.name}</span>
-                          <span className="text-xs text-muted-foreground">{user.email}</span>
+                          <span className="text-muted-foreground text-xs">{user.email}</span>
                         </div>
                         <ChevronsUpDownIcon className="ml-1 h-4 w-4" />
                       </Button>
@@ -155,9 +152,7 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
                           </Avatar>
                           <div className="grid flex-1 text-left text-sm leading-tight">
                             <span className="truncate font-medium">{user.name}</span>
-                            <span className="truncate text-xs text-muted-foreground">
-                              {user.email}
-                            </span>
+                            <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                           </div>
                         </div>
                       </DropdownMenuLabel>
