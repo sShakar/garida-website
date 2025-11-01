@@ -1,0 +1,9 @@
+/* ---------- CUSTOM ANIMATIONS ---------- */
+/*
+ * Note: Core animations are defined in tailwind.config.js
+ * This file is reserved for additional custom animations that are not part of Tailwind
+ */
+
+@layer utilities {
+  /* Add additional custom animations here if needed */
+}

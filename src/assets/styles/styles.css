@@ -1,0 +1,14 @@
+/* ---------- CUSTOM UTILITY STYLES ---------- */
+@layer utilities {
+  /* Add custom utility classes here */
+
+  /* Smooth scrolling */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------- CUSTOM COMPONENT STYLES ---------- */
+@layer components {
+  /* Add custom component styles here */
+}

@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "./animation.css";
+@import "./styles.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- THEME VARIABLES ---------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ---------- LIGHT MODE ---------- */
+:root {
+  --radius: 0.625rem;
+
+  /* Core brand colors */
+  --primary: #e41e26; /* Garida red */
+  --primary-foreground: #ffffff;
+  --secondary: #000000; /* Garida black */
+  --secondary-foreground: #ffffff;
+
+  /* Base */
+  --background: #ffffff;
+  --foreground: #111111;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+
+  /* Support colors */
+  --muted: #f3f3f3;
+  --muted-foreground: #555555;
+  --accent: #e41e26;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4444;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #e41e26;
+
+  /* Sidebar */
+  --sidebar: #1A1A1A; /* deep graphite gray */
+  --sidebar-foreground: #FFFFFF; /* white text/icons for contrast */
+  --sidebar-primary: #e41e26; /* your brand red */
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2A2A2A; /* slightly lighter hover/active bg */
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #333333;
+  --sidebar-ring: #e41e26;
+
+  /* Charts / accent tints */
+  --chart-1: #e41e26;
+  --chart-2: #000000;
+  --chart-3: #c1121f;
+  --chart-4: #f85a40;
+  --chart-5: #7a7a7a;
+}
+
+/* ---------- DARK MODE ---------- */
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+
+  /* Brand colors stay the same for consistency */
+  --primary: #e41e26;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+
+  /* Surfaces */
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #111111;
+  --popover-foreground: #ffffff;
+
+  /* Support colors */
+  --muted: #1c1c1c;
+  --muted-foreground: #aaaaaa;
+  --accent: #e41e26;
+  --accent-foreground: #ffffff;
+  --destructive: #ff5f5f;
+  --border: #333333;
+  --input: #222222;
+  --ring: #e41e26;
+
+  /* Sidebar */
+  --sidebar: #0F0F0F; /* deeper black for dark mode */
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #e41e26;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1C1C1C;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #222222;
+  --sidebar-ring: #e41e26;
+  /* Charts / accent tints */
+  --chart-1: #e41e26;
+  --chart-2: #ffffff;
+  --chart-3: #f85a40;
+  --chart-4: #7a7a7a;
+  --chart-5: #ffb3b3;
+}
+
+/* ---------- BASE ---------- */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
