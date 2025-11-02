@@ -93,12 +93,12 @@ export function MobileMenu({ activePage = "" }) {
               {/* Auth Buttons */}
               <div className="flex flex-col gap-4">
                 <Button variant="outline" asChild className="h-12 w-full justify-center text-lg">
-                  <Link href="/sign-in" onClick={() => setIsOpen(false)}>
+                  <Link href="/coming-soon" onClick={() => setIsOpen(false)}>
                     Sign in
                   </Link>
                 </Button>
                 <Button asChild className="h-12 w-full justify-center text-lg">
-                  <Link href="/sign-up" onClick={() => setIsOpen(false)}>
+                  <Link href="/coming-soon" onClick={() => setIsOpen(false)}>
                     Get started
                   </Link>
                 </Button>

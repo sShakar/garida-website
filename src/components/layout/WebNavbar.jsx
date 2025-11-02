@@ -26,7 +26,7 @@ import {
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import GaridaLogoLong from "@/assets/img/garida-logo-long.png";
 
-export function WebNavbar({ activePage = "", isAuthenticated = false }) {
+export default function WebNavbar({ activePage = "", isAuthenticated = false }) {
   const navItems = [
     { label: "Home", link: "/", page: "" },
     { label: "About", link: "/about", page: "about" },
@@ -40,8 +40,8 @@ export function WebNavbar({ activePage = "", isAuthenticated = false }) {
   ];
 
   const authButtons = [
-    { label: "Sign in", link: "/sign-in", variant: "ghost" },
-    { label: "Get started", link: "/sign-up", variant: "default" },
+    { label: "Sign in", link: "/coming-soon", variant: "ghost" },
+    { label: "Get started", link: "/coming-soon", variant: "default" },
   ];
 
   const user = {

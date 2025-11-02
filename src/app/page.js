@@ -17,8 +17,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { WebNavbar } from "@/components/layout/WebNavbar";
-import { WebFooter } from "@/components/layout/WebFooter";
+import WebNavbar from "@/components/layout/WebNavbar";
+import WebFooter from "@/components/layout/WebFooter";
 
 export default function Home() {
   const features = [
@@ -64,13 +64,13 @@ export default function Home() {
   const heroButtons = [
     {
       label: "Start shipping now",
-      link: "/sign-up",
+      link: "/coming-soon",
       variant: "default",
       icon: ArrowRightIcon,
     },
     {
       label: "Track a package",
-      link: "/sign-in",
+      link: "/coming-soon",
       variant: "outline",
     },
   ];
@@ -78,13 +78,13 @@ export default function Home() {
   const ctaButtons = [
     {
       label: "Create free account",
-      link: "/sign-up",
+      link: "/coming-soon",
       variant: "secondary",
       className: "bg-white px-8 text-base text-slate-900 hover:bg-slate-100",
     },
     {
       label: "Sign in to dashboard",
-      link: "/sign-in",
+      link: "/coming-soon",
       variant: "outline",
       className: "bg-primary border-white px-8 text-base text-white hover:bg-white/10",
     },

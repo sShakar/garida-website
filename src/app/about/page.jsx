@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { PackageIcon, UsersIcon, GlobeIcon, AwardIcon } from "lucide-react";
 
-import { WebNavbar } from "@/components/layout/WebNavbar";
-import { WebFooter } from "@/components/layout/WebFooter";
+import WebNavbar from "@/components/layout/WebNavbar";
+import WebFooter from "@/components/layout/WebFooter";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,7 +46,7 @@ export default function AboutPage() {
   const ctaButtons = [
     {
       label: "Get started",
-      link: "/sign-up",
+      link: "/coming-soon",
       variant: "secondary",
       className: "bg-white px-8 text-base text-slate-900 hover:bg-slate-100",
     },

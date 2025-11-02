@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GaridaLogoLong from "@/assets/img/garida-logo-long.png";
 
-export function WebFooter() {
+export default function WebFooter() {
   const currentYear = new Date().getFullYear();
 
   const footerSections = [

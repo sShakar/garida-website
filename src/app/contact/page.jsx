@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { WebNavbar } from "@/components/layout/WebNavbar";
-import { WebFooter } from "@/components/layout/WebFooter";
+import WebNavbar from "@/components/layout/WebNavbar";
+import WebFooter from "@/components/layout/WebFooter";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
