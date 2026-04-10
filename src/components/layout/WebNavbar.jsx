@@ -40,8 +40,8 @@ export default function WebNavbar({ activePage = "", isAuthenticated = false }) 
   ];
 
   const authButtons = [
-    { label: "Sign in", link: "/coming-soon", variant: "ghost" },
-    { label: "Get started", link: "/coming-soon", variant: "default" },
+    { label: "Sign in", link: "https://admin.garidaexpress.com/sign-in", variant: "ghost" },
+    { label: "Get started", link: "https://admin.garidaexpress.com/sign-up", variant: "default" },
   ];
 
   const user = {
@@ -179,7 +179,7 @@ export default function WebNavbar({ activePage = "", isAuthenticated = false }) 
                 <>
                   {authButtons.map((button, index) => (
                     <Button key={index} variant={button.variant} size="sm" asChild>
-                      <Link href={button.link} className="cursor-pointer">
+                      <Link href={button.link} target="_blank" className="cursor-pointer">
                         {button.label}
                       </Link>
                     </Button>

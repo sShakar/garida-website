@@ -37,13 +37,7 @@ export function MobileMenu({ activePage = "" }) {
         <div className="border-b bg-white px-4 py-3">
           <div className="container mx-auto flex items-center justify-between">
             <Link href="/" onClick={() => setIsOpen(false)}>
-              <Image
-                src={GaridaLogoLong}
-                alt="Garida Express"
-                width={120}
-                height={36}
-                className="object-contain"
-              />
+              <Image src={GaridaLogoLong} alt="Garida Express" width={120} height={36} className="object-contain" />
             </Link>
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="h-10 w-10 cursor-pointer">
@@ -66,9 +60,7 @@ export function MobileMenu({ activePage = "" }) {
                     href={item.link}
                     onClick={() => setIsOpen(false)}
                     className={`cursor-pointer text-2xl font-semibold transition-colors ${
-                      activePage === item.page
-                        ? "text-primary"
-                        : "hover:text-primary text-slate-900"
+                      activePage === item.page ? "text-primary" : "hover:text-primary text-slate-900"
                     }`}
                   >
                     {item.label}
@@ -93,7 +85,7 @@ export function MobileMenu({ activePage = "" }) {
               {/* Auth Buttons */}
               <div className="flex flex-col gap-4">
                 <Button variant="outline" asChild className="h-12 w-full justify-center text-lg">
-                  <Link href="/coming-soon" onClick={() => setIsOpen(false)}>
+                  <Link href="https://admin.garidaexpress.com/sign-in" target="_blank" onClick={() => setIsOpen(false)}>
                     Sign in
                   </Link>
                 </Button>
