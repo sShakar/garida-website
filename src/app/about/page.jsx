@@ -46,7 +46,7 @@ export default function AboutPage() {
   const ctaButtons = [
     {
       label: "Get started",
-      link: "/coming-soon",
+      link: "https://admin.garidaexpress.com/sign-up",
       variant: "secondary",
       className: "bg-white px-8 text-base text-slate-900 hover:bg-slate-100",
     },

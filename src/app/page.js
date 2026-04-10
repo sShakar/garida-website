@@ -64,13 +64,13 @@ export default function Home() {
   const heroButtons = [
     {
       label: "Start shipping now",
-      link: "/coming-soon",
+      link: "https://admin.garidaexpress.com/sign-up",
       variant: "default",
       icon: ArrowRightIcon,
     },
     {
       label: "Track a package",
-      link: "/coming-soon",
+      link: "https://admin.garidaexpress.com/sign-in",
       variant: "outline",
     },
   ];
@@ -78,13 +78,13 @@ export default function Home() {
   const ctaButtons = [
     {
       label: "Create free account",
-      link: "/coming-soon",
+      link: "https://admin.garidaexpress.com/sign-up",
       variant: "secondary",
       className: "bg-white px-8 text-base text-slate-900 hover:bg-slate-100",
     },
     {
       label: "Sign in to dashboard",
-      link: "/coming-soon",
+      link: "https://admin.garidaexpress.com/sign-in",
       variant: "outline",
       className: "bg-primary border-white px-8 text-base text-white hover:bg-white/10",
     },
