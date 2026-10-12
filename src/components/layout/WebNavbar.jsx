@@ -1,195 +1,74 @@
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  BellIcon,
-  UserIcon,
-  CreditCardIcon,
-  LogOutIcon,
-  ChevronsUpDownIcon,
-} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRightIcon, PhoneIcon, SmartphoneIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import NavLinks from "@/components/layout/NavLinks";
 import GaridaLogoLong from "@/assets/img/garida-logo-long.png";
+import { AUTH_LINKS, CONTACT } from "@/lib/site";
 
-export default function WebNavbar({ activePage = "", isAuthenticated = false }) {
-  const navItems = [
-    { label: "Home", link: "/", page: "" },
-    { label: "About", link: "/about", page: "about" },
-    { label: "Contact", link: "/contact", page: "contact" },
-  ];
-
-  const socialMediaItems = [
-    { icon: FacebookIcon, link: "https://facebook.com", label: "Facebook" },
-    { icon: InstagramIcon, link: "https://instagram.com", label: "Instagram" },
-    { icon: LinkedinIcon, link: "https://linkedin.com", label: "LinkedIn" },
-  ];
-
-  const authButtons = [
-    { label: "Sign in", link: "https://admin.garidaexpress.com/sign-in", variant: "ghost" },
-    { label: "Get started", link: "https://admin.garidaexpress.com/sign-up", variant: "default" },
-  ];
-
-  const user = {
-    name: "Admin User",
-    email: "info@garidaexpress.com",
-    avatar: "/avatars/admin.jpg",
-  };
-
-  const userMenuItems = [
-    { label: "Account", icon: UserIcon, link: "/dashboard" },
-    { label: "Wallet", icon: CreditCardIcon, link: "/dashboard" },
-    { label: "Notifications", icon: BellIcon, link: "/notifications" },
-  ];
-
-  const unreadNotifications = 3;
-
+export default function WebNavbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b bg-white">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="cursor-pointer">
-            <Image
-              src={GaridaLogoLong}
-              alt="Garida Express - Worldwide Shipping"
-              width={120}
-              height={36}
-              className="object-contain"
-            />
-          </Link>
+    <>
+      {/* Dispatch strip */}
+      <div className="bg-ink hidden text-stone-300 md:block">
+        <div className="container mx-auto flex h-9 items-center justify-between px-4 font-mono text-[11px] tracking-[0.15em] uppercase">
+          <p className="flex items-center gap-2.5">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="animate-signal bg-primary absolute inset-0 rounded-full" />
+              <span className="bg-primary relative h-2 w-2 rounded-full" />
+            </span>
+            Express courier · Erbil, Kurdistan
+          </p>
           <div className="flex items-center gap-6">
-            {/* Mobile Menu */}
-            <MobileMenu activePage={activePage} />
-
-            {/* Navigation Links - Desktop */}
-            <div className="hidden items-center gap-6 md:flex">
-              {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.link}
-                  className={`cursor-pointer text-sm transition-colors ${
-                    activePage === item.page ? "text-primary font-medium" : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Social Media Links - Desktop */}
-            <div className="hidden items-center gap-2 sm:flex">
-              {socialMediaItems.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  aria-label={item.label}
-                  className="hover:bg-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-100 transition-colors hover:text-white"
-                >
-                  <item.icon className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
-
-            {/* Auth Buttons or User Menu - Desktop */}
-            <div className="hidden items-center gap-3 md:flex">
-              {isAuthenticated ? (
-                <>
-                  {/* Notifications Icon */}
-                  <Link href="/notifications" className="relative cursor-pointer">
-                    <Button variant="ghost" size="icon" className="relative cursor-pointer">
-                      <BellIcon className="h-5 w-5" />
-                      {unreadNotifications > 0 && (
-                        <Badge
-                          variant="default"
-                          className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
-                        >
-                          {unreadNotifications}
-                        </Badge>
-                      )}
-                    </Button>
-                  </Link>
-
-                  {/* User Menu */}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="flex cursor-pointer items-center gap-2 px-2">
-                        <Avatar className="h-8 w-8 rounded-lg">
-                          <AvatarImage src={user.avatar} alt={user.name} />
-                          <AvatarFallback className="rounded-lg">
-                            <UserIcon className="h-4 w-4" />
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="hidden flex-col items-start text-left lg:flex">
-                          <span className="text-sm font-medium">{user.name}</span>
-                          <span className="text-muted-foreground text-xs">{user.email}</span>
-                        </div>
-                        <ChevronsUpDownIcon className="ml-1 h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56" align="end" sideOffset={8}>
-                      <DropdownMenuLabel className="p-0 font-normal">
-                        <div className="flex items-center gap-2 px-2 py-1.5 text-left text-sm">
-                          <Avatar className="h-8 w-8 rounded-lg">
-                            <AvatarImage src={user.avatar} alt={user.name} />
-                            <AvatarFallback className="rounded-lg">
-                              <UserIcon className="h-4 w-4" />
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="grid flex-1 text-left text-sm leading-tight">
-                            <span className="truncate font-medium">{user.name}</span>
-                            <span className="text-muted-foreground truncate text-xs">{user.email}</span>
-                          </div>
-                        </div>
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuGroup>
-                        {userMenuItems.map((item, index) => (
-                          <DropdownMenuItem key={index} asChild>
-                            <Link href={item.link} className="cursor-pointer">
-                              <item.icon className="h-4 w-4" />
-                              <span>{item.label}</span>
-                            </Link>
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="cursor-pointer">
-                        <LogOutIcon className="h-4 w-4" />
-                        Log out
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </>
-              ) : (
-                <>
-                  {authButtons.map((button, index) => (
-                    <Button key={index} variant={button.variant} size="sm" asChild>
-                      <Link href={button.link} target="_blank" className="cursor-pointer">
-                        {button.label}
-                      </Link>
-                    </Button>
-                  ))}
-                </>
-              )}
-            </div>
+            <a href={CONTACT.phoneHref} className="flex items-center gap-2 transition-colors hover:text-white">
+              <PhoneIcon className="h-3.5 w-3.5" aria-hidden="true" />
+              {CONTACT.phone}
+            </a>
+            <Link href="/download" className="flex items-center gap-2 text-white transition-colors hover:text-red-400">
+              <SmartphoneIcon className="h-3.5 w-3.5" aria-hidden="true" />
+              Get the app
+            </Link>
           </div>
         </div>
       </div>
-    </nav>
+
+      <header className="border-ink/10 bg-paper/80 sticky top-0 z-50 border-b backdrop-blur-md">
+        <div className="container mx-auto flex h-16 items-center justify-between gap-6 px-4">
+          <Link href="/" className="shrink-0 rounded-sm" aria-label="Garida Express home">
+            <Image
+              src={GaridaLogoLong}
+              alt="Garida Express"
+              width={124}
+              height={43}
+              priority
+              className="h-[43px] w-[124px] object-contain"
+            />
+          </Link>
+
+          <nav aria-label="Main" className="hidden lg:block">
+            <NavLinks />
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" asChild className="hidden rounded-full lg:inline-flex">
+              <Link href={AUTH_LINKS.signIn} target="_blank" rel="noopener noreferrer">
+                Sign in
+                <span className="sr-only">(opens in a new tab)</span>
+              </Link>
+            </Button>
+            <Button asChild className="group hidden rounded-full lg:inline-flex">
+              <Link href={AUTH_LINKS.signUp} target="_blank" rel="noopener noreferrer">
+                Get started
+                <ArrowRightIcon className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </Link>
+            </Button>
+            <MobileMenu />
+          </div>
+        </div>
+      </header>
+    </>
   );
 }

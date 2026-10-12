@@ -1,11 +1,71 @@
 /* ---------- CUSTOM UTILITY STYLES ---------- */
-@layer utilities {
-  /* Add custom utility classes here */
 
-  /* Smooth scrolling */
-  .scroll-smooth {
-    scroll-behavior: smooth;
+/* Wide, heavy display type for headlines (Archivo's width axis) */
+@utility font-display {
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-stretch: 112%;
+  letter-spacing: -0.035em;
+}
+
+/* Faint route-map grid on light paper sections */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Same grid for dark ink sections */
+@utility bg-grid-dark {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--paper) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--paper) 7%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Diagonal "express" speed stripes */
+@utility bg-speed {
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent 0 14px,
+    color-mix(in oklab, currentColor 14%, transparent) 14px 16px
+  );
+}
+
+/* Film-grain texture; the element needs `relative` and its children sit above via z-index */
+@utility grain {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+}
+
+/* Perforated tear-off edge for shipping labels */
+@utility perforation {
+  background-image: radial-gradient(circle, var(--paper) 3px, transparent 3.5px);
+  background-size: 14px 14px;
+  background-position: center;
+  background-repeat: repeat-x;
+}
+
+/* Fade + rise as the element scrolls into view (scroll-driven; no JS) */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* Hide the content of a scrolling ticker edge with a soft fade */
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 /* ---------- CUSTOM COMPONENT STYLES ---------- */

@@ -1,9 +1,82 @@
 /* ---------- CUSTOM ANIMATIONS ---------- */
 /*
- * Note: Core animations are defined in tailwind.config.js
- * This file is reserved for additional custom animations that are not part of Tailwind
+ * Entrance animations (animate-in, fade-in, slide-in-*) come from tw-animate-css.
+ * The keyframes below power the shipping motifs: ticker tape, moving route lines,
+ * floating labels and scroll reveals. Every looping animation is paused for
+ * visitors who prefer reduced motion.
  */
 
-@layer utilities {
-  /* Add additional custom animations here if needed */
+@theme {
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-route: route-dash 1.4s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-travel: travel 4.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-signal: signal 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes route-dash {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes travel {
+    0% {
+      left: 0%;
+    }
+    70%,
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes signal {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-route,
+  .animate-float,
+  .animate-travel,
+  .animate-signal {
+    animation: none;
+  }
 }

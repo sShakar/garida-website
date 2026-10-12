@@ -1,209 +1,309 @@
-"use client";
+import { ArrowDownIcon, ArrowUpRightIcon, ClockIcon, HeadsetIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 
-import { useState } from "react";
-import { MailIcon, PhoneIcon, MapPinIcon, ClockIcon } from "lucide-react";
-
-import Link from "next/link";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import WebNavbar from "@/components/layout/WebNavbar";
 import WebFooter from "@/components/layout/WebFooter";
+import ContactForm from "@/components/contact/ContactForm";
+import SectionLabel from "@/components/marketing/SectionLabel";
+import Barcode from "@/components/marketing/Barcode";
+import { CONTACT } from "@/lib/site";
+
+export const metadata = {
+  title: "Contact Us - Garida Express",
+  description: "Get in touch with Garida Express by email, phone or at our office in Erbil.",
+};
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Contact form data:", formData);
-      alert("Thank you for your message! We'll get back to you soon.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  const contactInfo = [
+  const contactChannels = [
     {
       icon: MailIcon,
       title: "Email",
       description: "Send us an email anytime",
-      value: "info@garidaexpress.com",
-      link: "mailto:info@garidaexpress.com",
+      value: CONTACT.email,
+      href: `mailto:${CONTACT.email}`,
     },
     {
       icon: PhoneIcon,
       title: "Phone",
       description: "Call us during business hours",
-      value: "+964 (750) 666 9290",
-      link: "tel:+9647506669290",
-    },
-    {
-      icon: MapPinIcon,
-      title: "Office",
-      description: "Visit our office",
-      value: "Zanko Bank, Adala, Erbil-Kurdistan, Iraq",
-      link: "#",
+      value: CONTACT.phone,
+      href: CONTACT.phoneHref,
     },
     {
       icon: ClockIcon,
       title: "Hours",
       description: "We're available",
       value: "24/7 Customer Support",
-      link: "#",
     },
   ];
 
   return (
-    <div className="bg-background min-h-screen">
-      <WebNavbar activePage="contact" />
+    <div className="min-h-screen">
+      <WebNavbar />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-white to-slate-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl space-y-6 text-center">
-            <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">Get in Touch</h1>
-            <p className="text-lg text-slate-600">Have a question or need help? We're here for you 24/7.</p>
+      <main>
+        {/* Hero Section */}
+        <section className="bg-grid relative overflow-hidden border-b border-stone-200">
+          <div
+            aria-hidden="true"
+            className="bg-primary bg-speed absolute top-0 -right-24 hidden h-full w-[36%] -skew-x-12 text-white lg:block"
+          />
+
+          <div className="relative container mx-auto grid items-center gap-12 px-4 pt-14 pb-16 lg:grid-cols-[1fr_auto] lg:pt-20 lg:pb-24">
+            <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-6 text-center motion-safe:duration-700 lg:text-left">
+              <SectionLabel>Contact · 24/7 customer support</SectionLabel>
+
+              <h1 className="font-display text-ink mt-6 text-[2.6rem] leading-[0.95] font-black sm:text-6xl xl:text-7xl">
+                Get in <span className="text-primary">touch.</span>
+              </h1>
+
+              <p className="mx-auto mt-6 max-w-xl text-lg text-balance text-stone-600 md:text-xl lg:mx-0">
+                Have a question or need help? We&apos;re here for you 24/7.
+              </p>
+
+              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+                <Button size="xl" asChild className="group shadow-primary/30 shadow-lg">
+                  <a href="#send-message">
+                    Send a message
+                    <ArrowDownIcon className="transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
+                  </a>
+                </Button>
+                <Button size="xl" variant="outline" asChild className="border-ink/15 bg-white/70">
+                  <a href={CONTACT.phoneHref}>
+                    <PhoneIcon aria-hidden="true" />
+                    Call {CONTACT.phone}
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-6 motion-safe:fill-mode-both relative flex justify-center motion-safe:delay-150 motion-safe:duration-700">
+              {/* Parcel-tape band behind the stamp on small screens (the skewed red stripe takes over on lg) */}
+              <div
+                aria-hidden="true"
+                className="bg-primary bg-speed absolute top-1/2 left-1/2 h-24 w-[150vw] -translate-x-1/2 -translate-y-1/2 -rotate-6 text-white lg:hidden"
+              />
+              <SupportStamp />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Info Cards */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="text-center transition-shadow hover:shadow-md">
-                <CardHeader>
-                  <div className="bg-primary/10 mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full">
-                    <info.icon className="text-primary h-6 w-6" />
-                  </div>
-                  <CardTitle className="text-lg">{info.title}</CardTitle>
-                  <CardDescription className="text-xs">{info.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {info.link.startsWith("#") ? (
-                    <p className="text-sm font-medium text-slate-900">{info.value}</p>
-                  ) : (
-                    <Link href={info.link} className="text-primary text-sm font-medium hover:underline">
-                      {info.value}
-                    </Link>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+        <div className="container mx-auto grid gap-14 px-4 py-20 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10 lg:py-28 xl:gap-16">
+          {/* Contact details */}
+          <section aria-labelledby="contact-details-title" className="min-w-0">
+            <SectionLabel index="01">Dispatch desk</SectionLabel>
+            <h2
+              id="contact-details-title"
+              className="font-display text-ink mt-5 text-4xl leading-[1.02] font-extrabold md:text-5xl"
+            >
+              Reach us directly
+            </h2>
+            <p className="mt-4 text-lg text-stone-600">Email, call or visit our office in Erbil.</p>
 
-      {/* Contact Form */}
-      <section className="bg-slate-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-2xl">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl">Send us a message</CardTitle>
-                <CardDescription>
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="John Doe"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        disabled={isLoading}
-                      />
-                    </div>
+            <ul className="mt-10 space-y-4">
+              {contactChannels.map((channel, index) => (
+                <li
+                  key={channel.title}
+                  className={`reveal relative flex items-stretch overflow-hidden rounded-2xl border border-stone-200 bg-white transition-all duration-300 ${
+                    channel.href
+                      ? "group has-[a:focus-visible]:border-primary has-[a:focus-visible]:ring-ring/50 hover:-translate-y-1 hover:border-stone-300 hover:shadow-[0_20px_40px_-20px_rgba(12,12,14,0.25)] has-[a:focus-visible]:ring-[3px]"
+                      : ""
+                  }`}
+                >
+                  {/* Ticket stub */}
+                  <div className="bg-paper text-primary group-hover:bg-primary flex w-16 shrink-0 flex-col items-center justify-center gap-2 border-r border-dashed border-stone-300 py-5 transition-colors group-hover:text-white sm:w-20">
+                    <channel.icon className="h-6 w-6" aria-hidden="true" />
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[11px] tracking-[0.2em] text-stone-600 transition-colors group-hover:text-white"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      placeholder="How can we help you?"
-                      required
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      placeholder="Tell us more about your inquiry..."
-                      required
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      disabled={isLoading}
-                      className="focus-visible:border-primary focus-visible:ring-primary/20 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus-visible:ring-2 disabled:bg-slate-50 disabled:opacity-50"
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? (
-                      <>
-                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                        Sending message...
-                      </>
+                  <div className="min-w-0 flex-1 py-4 pr-4 pl-4 sm:pr-5 sm:pl-5">
+                    <h3 className="font-mono text-xs tracking-[0.2em] text-stone-600 uppercase">{channel.title}</h3>
+                    {channel.href ? (
+                      <a
+                        href={channel.href}
+                        className="font-display text-ink mt-1.5 block text-base font-extrabold [overflow-wrap:anywhere] outline-none after:absolute after:inset-0 sm:text-lg"
+                      >
+                        {channel.value}
+                      </a>
                     ) : (
-                      "Send message"
+                      <p className="font-display text-ink mt-1.5 text-base font-extrabold sm:text-lg">
+                        {channel.value}
+                      </p>
                     )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+                    <p className="mt-0.5 text-sm text-stone-600">{channel.description}</p>
+                  </div>
+
+                  {/* Corner marker: arrow for links, live signal for the always-on support line */}
+                  {channel.href ? (
+                    <ArrowUpRightIcon
+                      className="group-hover:text-primary pointer-events-none absolute top-4 right-4 h-5 w-5 text-stone-400 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <span aria-hidden="true" className="absolute top-5 right-5 flex h-2.5 w-2.5">
+                      <span className="animate-signal bg-primary absolute inset-0 rounded-full" />
+                      <span className="bg-primary relative h-2.5 w-2.5 rounded-full" />
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* Office, styled as the "ship to" block of a waybill */}
+            <div className="bg-ink grain reveal relative mt-4 overflow-hidden rounded-3xl text-white">
+              <div aria-hidden="true" className="bg-grid-dark absolute inset-0 opacity-70" />
+              <div
+                aria-hidden="true"
+                className="bg-primary/35 absolute -top-24 -right-20 h-64 w-64 rounded-full blur-3xl"
+              />
+
+              <div className="relative p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p aria-hidden="true" className="font-mono text-xs tracking-[0.2em] text-stone-400 uppercase">
+                      Ship to
+                    </p>
+                    <h3 className="font-display mt-2 text-2xl font-extrabold">Visit our office</h3>
+                  </div>
+                  <span className="bg-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
+                    <MapPinIcon className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                </div>
+                <address className="mt-5 text-lg leading-snug text-stone-200 not-italic sm:text-xl">
+                  {CONTACT.address}
+                </address>
+              </div>
+
+              {/* Tear-off line */}
+              <div aria-hidden="true" className="relative flex items-center">
+                <span className="bg-paper -ml-3 h-6 w-6 shrink-0 rounded-full" />
+                <span className="flex-1 border-t-2 border-dashed border-white/15" />
+                <span className="bg-paper -mr-3 h-6 w-6 shrink-0 rounded-full" />
+              </div>
+
+              <div className="relative flex items-center justify-between gap-4 p-6 sm:px-7">
+                <Button
+                  size="xl"
+                  variant="paper"
+                  asChild
+                  className="group focus-visible:ring-ink focus-visible:outline-white focus-visible:outline-solid"
+                >
+                  <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer">
+                    Open in Google Maps
+                    <ArrowUpRightIcon
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                </Button>
+                <Barcode className="h-10 max-w-28 min-w-0 flex-1 text-white/70" />
+              </div>
+            </div>
+          </section>
+
+          {/* Contact form */}
+          <section
+            id="send-message"
+            aria-labelledby="send-message-title"
+            className="min-w-0 self-start overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_30px_60px_-30px_rgba(12,12,14,0.25)]"
+          >
+            <div className="bg-ink flex items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-10">
+              <p className="min-w-0 truncate font-mono text-xs text-stone-400">
+                <span className="tracking-[0.2em] uppercase">To</span>{" "}
+                <span className="text-stone-200">{CONTACT.email}</span>
+              </p>
+              <span
+                aria-hidden="true"
+                className="border-primary text-primary font-display hidden shrink-0 -rotate-6 rounded-md border-2 px-2.5 py-0.5 text-sm font-black tracking-wider uppercase sm:inline-block"
+              >
+                Express
+              </span>
+            </div>
+
+            <div className="p-6 sm:p-8 lg:p-10">
+              <SectionLabel index="02">Write to us</SectionLabel>
+              <h2
+                id="send-message-title"
+                className="font-display text-ink mt-5 text-4xl leading-[1.02] font-extrabold md:text-5xl"
+              >
+                Send us a message
+              </h2>
+              <p className="mt-3 text-stone-600">
+                Fill out the form below and we&apos;ll get back to you as soon as possible.
+              </p>
+
+              <div className="mt-8 border-t border-dashed border-stone-300 pt-8">
+                <ContactForm />
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
+      </main>
 
       <WebFooter />
+    </div>
+  );
+}
+
+// Decorative rubber stamp for the hero. Hidden from assistive tech; the same facts are in the page text.
+function SupportStamp({ className = "" }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`relative h-60 w-60 sm:h-72 sm:w-72 lg:h-80 lg:w-80 xl:h-[22rem] xl:w-[22rem] ${className}`}
+    >
+      <div className="ring-ink/10 absolute inset-0 rounded-full bg-white shadow-[0_40px_80px_-24px_rgba(12,12,14,0.45)] ring-1" />
+
+      <svg
+        viewBox="0 0 200 200"
+        className="absolute inset-0 h-full w-full motion-safe:animate-spin"
+        style={{ animationDuration: "40s" }}
+      >
+        <defs>
+          <path id="support-stamp-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" fill="none" />
+        </defs>
+        <text className="fill-ink font-mono text-[10px] font-medium">
+          {/* The ring is 2 × π × 80 ≈ 502.65 long. lengthAdjust="spacing" adds no step after the last glyph, so
+              textLength is one letter step (~6.1) shorter; with the trailing no-break space the seam gap then
+              matches the other " • " gaps. */}
+          <textPath href="#support-stamp-ring" textLength="496.5" lengthAdjust="spacing">
+            {"CUSTOMER SUPPORT • 24/7 • ERBIL, KURDISTAN •\u00A0"}
+          </textPath>
+        </text>
+      </svg>
+
+      <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full">
+        <circle cx="100" cy="100" r="94" fill="none" className="stroke-ink/15" strokeWidth="1" />
+        <circle
+          cx="100"
+          cy="100"
+          r="66"
+          fill="none"
+          className="stroke-primary"
+          strokeWidth="1.5"
+          strokeDasharray="3 5"
+        />
+      </svg>
+
+      <div className="bg-ink absolute inset-[24%] flex flex-col items-center justify-center rounded-full text-white">
+        <HeadsetIcon className="text-primary h-7 w-7" />
+        <span className="font-display mt-1 text-4xl font-black">24/7</span>
+        <span className="font-mono text-[10px] tracking-[0.2em] text-stone-400 uppercase">Support</span>
+      </div>
+
+      {/* Sits below-left of the ring text, with room for the 10px float, so it never covers the rotating letters */}
+      <div className="animate-float bg-ink absolute -bottom-9 -left-12 flex items-center gap-2 rounded-full py-2 pr-4 pl-2 text-white shadow-lg sm:-bottom-7 lg:-bottom-4">
+        <span className="bg-primary flex h-7 w-7 items-center justify-center rounded-full">
+          <MapPinIcon className="h-3.5 w-3.5" />
+        </span>
+        <span className="text-xs font-semibold">Erbil, Kurdistan</span>
+      </div>
     </div>
   );
 }

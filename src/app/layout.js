@@ -1,13 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "@/assets/styles/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
 });
 
@@ -25,10 +26,14 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#0c0c0e",
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="en" className={`${archivo.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
